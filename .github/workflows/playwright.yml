@@ -29,8 +29,16 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
+      # Start your Vite dev server in background
+      - name: Start app server in background
+        run: npm run dev &
+
+      # Wait until your app is ready to accept connections
+      - name: Wait for app server to be ready
+        run: npx wait-on http://localhost:5173
+
+      # Run Playwright tests
       - name: Run Playwright tests
-        # Specify the test folder path relative to repo root
         run: npx playwright test tests/tests
 
       - name: Upload HTML report
@@ -46,13 +54,20 @@ jobs:
         if: always()
         with:
           name: traces
-          path: test-results/  # adjust if your trace files go elsewhere
+          path: test-results/
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
-          path: test-results/screenshots/  # adjust if screenshots are saved here
+          path: test-results/screenshots/
+
       - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: videos
+          path: test-results/videos/
+      - name: Upload Logs
         uses: actions/upload-artifact@v4  

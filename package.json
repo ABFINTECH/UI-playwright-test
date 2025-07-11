@@ -29,5 +29,78 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:react-refresh/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "react-hooks",
+      "react-refresh"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "react/react-in-jsx-scope": "off"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "playwright": {
+    "testDir": "tests",
+    "timeout": 30000,
+    "use": {
+      "baseURL": "http://localhost:5173",
+      "viewport": { "width": 1280, "height": 720 },
+      "ignoreHTTPSErrors": true,
+      "video": "retain-on-failure",
+      "trace": "on-first-retry"
+    },
+    "projects": [ 
+      {
+        "name": "chromium",
+        "use": { "browserName": "chromium" }
+      },
+      {
+        "name": "firefox",
+        "use": { "browserName": "firefox" }
+      },
+      {
+        "name": "webkit",
+        "use": { "browserName": "webkit" }
+      }
+    ]
+  },
+  "files": [
+    "src",
+    "public",
+    "tests"
+  ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
   }
 }
