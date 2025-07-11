@@ -77,9 +77,8 @@ test('check if vite + react is present', async ({ page }) => {
   await expect(readTheDocsText).toBeVisible();
 }); 
 
-
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:5174/');
+  await page.goto('http://localhost:5173/');
   const page1Promise = page.waitForEvent('popup');
   await page.getByRole('link', { name: 'React logo' }).click();
   const page1 = await page1Promise;
