@@ -7,8 +7,7 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:  # Allows manual triggering of the workflow 
-
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   test:
@@ -31,7 +30,8 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        # Specify the test folder path relative to repo root
+        run: npx playwright test tests/tests
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
@@ -47,5 +47,12 @@ jobs:
         with:
           name: traces
           path: test-results/  # adjust if your trace files go elsewhere
+
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: test-results/screenshots/  # adjust if screenshots are saved here
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4  
